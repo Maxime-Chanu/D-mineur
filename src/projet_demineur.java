@@ -18,21 +18,41 @@ public class projet_demineur {
 		return ThreadLocalRandom.current().nextInt(a, b + 1);
 	}
 
-
-	//
-	// Exercice 1 : Initialisation des tableaux
-	//
-
-	// Question 1.a] déclarez les variables globales T et Tadj ici
 	static int[][] T; //Voici les variables globale
 	static int[][] Tadj;
 
-	// Question 1.b] Fonction init
-	public static void init() { // ATTENTION, vous devez modifier la signature de cette fonction
+	public static void main(String[] args) {
 		
-	
+		init(4,4,6);
+		afficherTableau2D(T);
+		afficherTableau2D(Tadj);
+		
+		
 	}
-
+	
+	// Question 1.b] Fonction init pour T et Tadj 
+	public static void init(int h, int l, int n) {
+		T 		= new int [h][l];
+		Tadj 	= new int [h][l];
+		int i 	= 0;
+		while(i < n){
+			int a = entierAleatoire(0,h-1);
+			int b = entierAleatoire(0,l-1);
+			if( Tadj[a][b] != -1 ) {
+				Tadj[a][b] = -1;
+				i++;
+			}
+		}
+	}
+	// affichage d'un tableau a 2 dimensions 
+	public static void afficherTableau2D(int[][] tab) {
+		for(int i = 0; i < tab.length; i++) {
+			for (int j = 0; j < tab[i].length; j++) {
+				System.out.print(tab[i][j]);
+			}
+			System.out.println();
+		}
+	}
 	// Question 1.c] Fonction caseCorrecte
 	public static void caseCorrecte() { // ATTENTION, vous devez modifier la signature de cette fonction)
 		
@@ -119,10 +139,7 @@ public class projet_demineur {
 
 	// Question 4.e]
 	// Votre *unique* méthode main
-	public static void main(String[] args) {
-		
-
-	}
+	// elle est en haut 
 
 
 	//
