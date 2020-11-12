@@ -1,39 +1,20 @@
-// Ceci est un squelette à REMPLIR pour le projet INF1 sur le jeu de démineur
-//
-// - N'oubliez pas de renseigner vos deux noms
-// Prénom Nom Groupe : élève 1/2
-// Prénom Nom Groupe élève 2/2
-//
-// - Pour chaque question, le squelette donne le nom de la fonction à écrire mais *pas* la signature
-//   il faut remplir les types d'entrées et de sorties (indiqués par ?) et remplir l'intérieur du code de chaque fonction.
-//
-// - L'unique fichier de code que vous soumettrez sera ce fichier Java, donc n'hésitez pas à le commenter abondamment.
-//   inutile d'exporter votre projet comme archive Zip et de rendre ce zip.
-//   Optionnel : vous pouvez aussi joindre un document PDF donnant des explications supplémentaires (si vous utilisez OpenOffice/LibreOffice/Word, exportez le document en PDF), avec éventuellement des captures d'écran montrant des étapes affichées dans la console
-//
-// - Regardez en ligne sur le Moodle pour le reste des consignes, et dans le fichier PDF du sujet du projet
-//   https://foad.univ-rennes1.fr/mod/assign/view.php?id=534254
-//
-// - A rendre avant le vendredi 04 décembre, maximum 23h59.
-//
-// - ATTENTION Le projet est assez long, ne commencez pas au dernier moment !
-//
-// - Enfin, n'hésitez pas à contacter l'équipe pédagogique, en posant une question sur le forum du Moodle, si quelque chose n'est pas clair.
-//
 
-// Pour utiliser des scanners pour lire des entrées depuis le clavier
-// utilisés en questions 4.d] pour la fonction jeu()
+//
+// Maxime Chanu L1 G5 - B 
+// 
+//   Optionnel : vous pouvez aussi joindre un document PDF donnant des explications supplémentaires
+//
+// Pour utiliser des scanners pour lire des entrees depuis le clavier
+// utilises en questions 4.d] pour la fonction jeu()
 import java.util.Scanner;
-
-// Pour la fonction entierAleatoire(a, b) que l'on vous donne ci-dessous
+// Pour la fonction entierAleatoire(a, b) 
 import java.util.concurrent.ThreadLocalRandom;
 
-// L'unique classe de votre projet
+				/* Main */
 public class projet_demineur {
 
-	// Donné, utile pour la question 1.b]
 	public static int entierAleatoire(int a, int b){
-		// Renvoie un entier aléatoire uniforme entre a (inclus) et b (inclus).
+		// Renvoie un entier aleatoire uniforme entre a (inclus) et b (inclus).
 		return ThreadLocalRandom.current().nextInt(a, b + 1);
 	}
 
