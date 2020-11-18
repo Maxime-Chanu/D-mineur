@@ -24,6 +24,8 @@ public class projet_demineur {
 	public static void main(String[] args) {
 		
 		init(4,4,6);
+		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
+		System.out.println(go);
 		afficherTableau2D(T);
 		afficherTableau2D(Tadj);
 		
@@ -36,6 +38,7 @@ public class projet_demineur {
 		Tadj 	= new int [h][l];
 		int i 	= 0;
 		while(i < n){
+			// remplir de mines 
 			int a = entierAleatoire(0,h-1);
 			int b = entierAleatoire(0,l-1);
 			if( Tadj[a][b] != -1 ) {
@@ -54,9 +57,18 @@ public class projet_demineur {
 		}
 	}
 	// Question 1.c] Fonction caseCorrecte
-	public static void caseCorrecte() { // ATTENTION, vous devez modifier la signature de cette fonction)
-		
-	}
+		public static boolean caseCorrecte(int i, int j ) { 
+	        int largeur = T[0].length;
+	        int hauteur = T.length; 
+	        if(j >= largeur || i >= hauteur){
+	            return false;
+	        }else{
+	            return true;
+	        }
+	        
+			
+		}
+
 
 	// Question 1.d] Fonction calculerAdjacent
 	public static void calculerAdjacent() {
