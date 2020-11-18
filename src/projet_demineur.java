@@ -23,11 +23,14 @@ public class projet_demineur {
 
 	public static void main(String[] args) {
 		
-		init(4,4,6);
+		init(10,10,6);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
 		System.out.println(go);
 		afficherTableau2D(T);
+		calculerAdjacent();
+		System.out.println();
 		afficherTableau2D(Tadj);
+		int g = Tadj.length;
 		
 		
 	}
@@ -52,6 +55,7 @@ public class projet_demineur {
 		for(int i = 0; i < tab.length; i++) {
 			for (int j = 0; j < tab[i].length; j++) {
 				System.out.print(tab[i][j]);
+				System.out.print("  ");
 			}
 			System.out.println();
 		}
@@ -70,10 +74,36 @@ public class projet_demineur {
 		}
 
 
-	// Question 1.d] Fonction calculerAdjacent
-	public static void calculerAdjacent() {
-		
-	}
+		// Question 1.d] Fonction calculerAdjacent
+		public static void calculerAdjacent() {
+	        int nbAdj; // nb de mines adjacentes 
+	        /* Variable de détection des cases autour */
+	        int a;      // ligne    
+	        int b;      // colonne 
+	        int i =0;
+	        int j =0;
+	        /* 2 for imbrique pour visiter toute les cases du tableau */ 
+	        for(i= 0; i < Tadj.length  ; i++ ){
+	            for(j = 0; j < Tadj[i].length  ; j++){
+	                if( Tadj[i][j] != -1 ){ // Si ce n'est pas une mine
+	                    nbAdj = 0;
+	                    /* 2 for imbrique pour tester les cases adjacentes */
+	                    for(a = i-1; a <= i+1; a++){
+	                        for(b = j-1; b <= j+1; b++){
+	                        	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
+	                        		 if(Tadj[a][b] == -1){
+	 	                                nbAdj++;
+	 	                            }
+	                        	}
+	                        }
+	                    }
+	                    Tadj[i][j] = nbAdj; // resultat placé dans la case concernée 
+	                }
+	            }
+	        }
+			
+		}
+
 
 	//
 	// Exercice 2 : Affichage de la grille
