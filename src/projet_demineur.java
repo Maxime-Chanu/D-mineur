@@ -31,6 +31,7 @@ public class projet_demineur {
 		System.out.println();
 		afficherTableau2D(Tadj);
 		int g = Tadj.length;
+		afficherGrille(false);
 		
 		
 	}
@@ -106,16 +107,44 @@ public class projet_demineur {
 
 
 	//
-	// Exercice 2 : Affichage de la grille
-	//
+	
+		// Exercice 2 : Affichage de la grille
+		//
 
-	// Question 2.a]
-	public static void afficherGrille() { // ATTENTION, vous devez modifier la signature de cette fonction
+		// Question 2.a]
+		public static void afficherGrille(boolean affMines) { 
+	        /* Affichage 1er ligne (celle avec les lettres ) */
+	        int k;
+	        char c = 'A';
+	        System.out.print("  |");
+	        for( k = 0 ; k < T[0].length; k++){
+	        	System.out.print(c);
+	        	System.out.print("|");
+	            c++;
+	        }
+	        /*  affichage de la grille de jeu    */ 
+	           for(int i = 0; i < T.length; i++ ){
+	        	   System.out.println();
+	        	   System.out.print("0" + i + "|");
+	               for(int j = 0; j < T[i].length; j++){
+	                   /* revel� toutes les mines */
+	                   if(affMines && Tadj[i][j] == -1){
+	                       T[i][j] = 1;
+	                   }
+	                   /* affichage du contenu de chaque case */ 
+	                   if(T[i][j] == 0){
+	                	   System.out.print(" ");
+	                   }else if(T[i][j] == 1){
+	                	   System.out.print(Tadj[i][j]);
+	                   }else if(T[i][j] == 2){
+	                	   System.out.print("X");
+	                   }
+	                   System.out.print("|");
+	               }
+	 	      }
+		}
 
-		// Note : Dans un premier temps, considérer que la grille contiendra au plus 52 colonnes
-		// (une pour chaque lettre de l'alphabet en majuscule et minuscule) et au plus 100 lignes
-		// (entiers de 0 à 99).
-	}
+	      
 
 
 	//
