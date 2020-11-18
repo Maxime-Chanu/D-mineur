@@ -135,7 +135,7 @@ public class projet_demineur {
 	                   if(T[i][j] == 0){
 	                	   System.out.print(" ");
 	                   }else if(T[i][j] == 1){
-	                	   System.out.print(Tadj[i][j]);
+	                	   System.out.print("!");
 	                   }else if(T[i][j] == 2){
 	                	   System.out.print("X");
 	                   }
