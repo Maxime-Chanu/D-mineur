@@ -23,7 +23,7 @@ public class projet_demineur {
 
 	public static void main(String[] args) {
 		
-		init(10,10,6);
+		init(12,12,6);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
 		System.out.println(go);
 		afficherTableau2D(T);
@@ -31,7 +31,7 @@ public class projet_demineur {
 		System.out.println();
 		afficherTableau2D(Tadj);
 		int g = Tadj.length;
-		afficherGrille(false);
+		afficherGrille(true);
 		
 		
 	}
@@ -125,7 +125,12 @@ public class projet_demineur {
 	        /*  affichage de la grille de jeu    */ 
 	           for(int i = 0; i < T.length; i++ ){
 	        	   System.out.println();
-	        	   System.out.print("0" + i + "|");
+	        	   if(i<10) {
+	        		   System.out.print("0" + i + "|");
+	        	   }else{
+	        		   System.out.print( i + "|");
+	        	   }
+	        	   
 	               for(int j = 0; j < T[i].length; j++){
 	                   /* revelé toutes les mines */
 	                   if(affMines && Tadj[i][j] == -1){
