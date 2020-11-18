@@ -157,8 +157,25 @@ public class projet_demineur {
 	//
 
 	// Question 3.a]
-	public static void caseAdjacenteZero() { // ATTENTION, vous devez modifier la signature de cette fonction
-		
+	public static boolean caseAdjacenteZero(int i, int j) { 
+		boolean zero = false;
+		int a = 0;
+		int b = 0;
+		// parcours des cases adjacentes
+		 for(a = i-1; a <= i+1; a++){
+             for(b = j-1; b <= j+1; b++){
+             	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
+             		 if(T[a][b] == 1){ // revelée ?
+                        zero = true;
+                      }
+             	}
+             }
+         }
+		if(zero & Tadj[i][j] == 0) {
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 
