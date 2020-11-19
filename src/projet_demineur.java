@@ -23,18 +23,23 @@ public class projet_demineur {
 
 	public static void main(String[] args) {
 		
-		init(12,12,6);
+		init(12,12,15);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
 		System.out.println(go);
 		afficherTableau2D(T);
 		calculerAdjacent();
 		System.out.println();
 		afficherTableau2D(Tadj);
-		afficherGrille(true);
+		afficherGrille(false);
 		System.out.println();
 		revelation(1,1);
 		System.out.println();
-		afficherGrille(true);
+		afficherGrille(false);
+		revelation(1,5);
+		revelation(5,7);
+		System.out.println();
+		System.out.println();
+		afficherGrille(false);
 		
 		
 	}
@@ -163,24 +168,24 @@ public class projet_demineur {
 
 	// Question 3.a]
 	public static boolean caseAdjacenteZero(int i, int j) { 
-		boolean zero = false;
+		//boolean zero = false;
 		int a = 0;
 		int b = 0;
 		// parcours des cases adjacentes
 		 for(a = i-1; a <= i+1; a++){
              for(b = j-1; b <= j+1; b++){
              	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
-             		 if(T[a][b] == 1){ // revelée ?
-                        zero = true;
+             		 if(T[a][b] == 1 & Tadj[i][j] == 0){ // revelée ?
+                        return true;
                       }
              	}
              }
-         }
-		if(zero & Tadj[i][j] == 0) {
-			return true;
-		}else {
-			return false;
-		}
+         } return false;
+	//	if(zero & Tadj[i][j] == 0) {
+	//		return true;
+	//	}else {
+	//		return false;
+	//	}
 		
 	}
 
@@ -191,7 +196,7 @@ public class projet_demineur {
 		int b = 0;
 		//boolean auMoinsUneNouvelleCase = true;
 		if(Tadj[i][j] == 0) {
-			for(int ko =0; ko < 30; ko++) {
+			for(int ko =0; ko < 10; ko++) {
 				//auMoinsUneNouvelleCase = false;
 				for(a = 0; a < Tadj.length  ; a++ ){
 		            for(b = 0; b < Tadj[i].length  ; b++){
