@@ -23,7 +23,7 @@ public class projet_demineur {
 
 	public static void main(String[] args) {
 		
-		init(12,12,15);
+		init(12,12,10);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
 		System.out.println(go);
 		afficherTableau2D(T);
@@ -37,10 +37,11 @@ public class projet_demineur {
 		afficherGrille(false);
 		revelation(1,5);
 		revelation(5,7);
+		actionDrapeau(10,10);
 		System.out.println();
 		System.out.println();
 		afficherGrille(false);
-		
+	
 		
 	}
 	
@@ -219,7 +220,12 @@ public class projet_demineur {
 	}
 
 	// Question 3.d]
-	public static void actionDrapeau() { // ATTENTION, vous devez modifier la signature de cette fonction
+	public static void actionDrapeau(int i, int j) { 
+		if(T[i][j] == 0) {
+			T[i][j] = 2;
+		}else if ( T[i][j] == 2) {
+			T[i][j] = 0;
+		}
 		
 	}
 	
