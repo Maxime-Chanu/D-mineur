@@ -30,7 +30,10 @@ public class projet_demineur {
 		calculerAdjacent();
 		System.out.println();
 		afficherTableau2D(Tadj);
-		int g = Tadj.length;
+		afficherGrille(true);
+		System.out.println();
+		revelation(1,1);
+		System.out.println();
 		afficherGrille(true);
 		
 		
@@ -139,8 +142,10 @@ public class projet_demineur {
 	                   /* affichage du contenu de chaque case */ 
 	                   if(T[i][j] == 0){
 	                	   System.out.print(" ");
-	                   }else if(T[i][j] == 1){
+	                   }else if(T[i][j] == 1 & Tadj[i][j] == -1){
 	                	   System.out.print("!");
+	                   }else if(T[i][j] == 1 & Tadj[i][j] >= 0) {
+	                	   System.out.print(Tadj[i][j]);
 	                   }else if(T[i][j] == 2){
 	                	   System.out.print("X");
 	                   }
@@ -180,9 +185,25 @@ public class projet_demineur {
 	}
 
 	// Question 3.b]
-	public static void revelation() { // ATTENTION, vous devez modifier la signature de cette fonction
-		
-
+	public static void revelation(int i, int j) { 
+		T[i][j] = 1;
+		int a = 0;
+		int b = 0;
+		//boolean auMoinsUneNouvelleCase = true;
+		if(Tadj[i][j] == 0) {
+			for(int ko =0; ko < 30; ko++) {
+				//auMoinsUneNouvelleCase = false;
+				for(a = 0; a < Tadj.length  ; a++ ){
+		            for(b = 0; b < Tadj[i].length  ; b++){
+		            	if(caseAdjacenteZero(a,b)) {
+		            		T[a][b] = 1;
+		            	//	auMoinsUneNouvelleCase = true;
+		            	}
+		            }
+				}
+			}
+			 
+		}
 	}
 
 
