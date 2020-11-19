@@ -23,7 +23,7 @@ public class projet_demineur {
 
 	public static void main(String[] args) {
 		
-		init(12,12,10);
+		init(3,3,1);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
 		System.out.println(go);
 		afficherTableau2D(T);
@@ -32,15 +32,11 @@ public class projet_demineur {
 		afficherTableau2D(Tadj);
 		afficherGrille(false);
 		System.out.println();
-		revelation(1,1);
+		revelation(0,0);
 		System.out.println();
 		afficherGrille(false);
-		revelation(1,5);
-		revelation(5,7);
-		actionDrapeau(10,10);
-		System.out.println();
-		System.out.println();
-		afficherGrille(false);
+		System.out.println(aGagne());
+	
 	
 		
 	}
@@ -246,8 +242,18 @@ public class projet_demineur {
 	//
 
 	// Question 4.a]
-	public static void aGagne() {
-		
+	public static boolean aGagne() {
+		int i = 0;
+		int j = 0;
+		  for(i= 0; i < Tadj.length  ; i++ ){
+	            for(j = 0; j < Tadj[i].length  ; j++){
+	            	if(Tadj[i][j] != -1 & T[i][j] == 0) {
+	            		return false;
+	            	}
+	            	
+	            }
+		  }
+		  return true; 
 	}
 
 	// Question 4.b]
