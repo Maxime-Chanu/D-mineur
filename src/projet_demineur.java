@@ -231,8 +231,13 @@ public class projet_demineur {
 	
 	
 	// Question 3.e]
-	public static void revelerCase() { // ATTENTION, vous devez modifier la signature de cette fonction
-		
+	public static boolean revelerCase(int i, int j) { 
+		if(Tadj[i][j] == -1) {
+			return false;
+		}else {
+			revelation(i,j);
+			return true;
+		}
 	}
 
 
