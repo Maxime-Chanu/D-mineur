@@ -25,58 +25,26 @@ public class projet_demineur {
 		
 		init(3,3,1);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
-		/*
-		 System.out.println(go);
 		afficherTableau2D(T);
 		calculerAdjacent();
 		System.out.println();
 		afficherTableau2D(Tadj);
 		afficherGrille(false);
 		System.out.println();
-		revelation(0,0);
-		System.out.println();
-		afficherGrille(false);
-		System.out.println(aGagne());
-		 */
-		/*
-		String str ="12";
-		char ch1 = str.charAt(0);
-		char ch2 = str.charAt(1);
-		String wola = "" + ch1 + ch2;
-		int resultat = Integer.parseInt(wola);
-		System.out.println("le résultat est : " + (resultat ) );
-		int entier = Character.getNumericValue(lettre) ;
-		*/
-		/*
-		String joueur = "r12z";
-		char lettre = joueur.charAt(3); // 'A'
-		String lettreS = "" + lettre; // string : "A"
-		if(lettreS.toUpperCase() == lettreS) { // CAPS
-			char lettreChar = lettreS.charAt(0);
-			int j = Character.getNumericValue(lettreChar) ;
-			j -= 10;
-			System.out.println(j);
-		}else if (lettreS.toUpperCase() != lettreS) { //min
-			char lettreChar = lettreS.charAt(0);
-			int j = Character.getNumericValue(lettreChar) ;
-			j -= 10;
-			j += 26;
-			System.out.println(j);
-			System.out.println("min");
-		}
-		char colonne = 'b';
-		if(colonne < 'b') {
-			System.out.println("inf à b");
-		}else { 
-			System.out.println("sup à b");
-		}
-		*/
-	//	System.out.println("le résultat est : " + (entier  ) );
-		String chaine = "d02A";
-		boolean res = verifierFormat(chaine);
-		System.out.println(res);
-		int[] InputJoueur = conversionCoordonnees(chaine);
-		System.out.println(InputJoueur[0] + "," + InputJoueur[1] + "," +InputJoueur[2] );
+		System.out.print("Entrez une case valide : ");
+		Scanner in = new Scanner(System.in);
+	    String inputPlayer = in.nextLine();
+	    if(verifierFormat(inputPlayer)) {
+	    	System.out.print("coordonnées valides : " + inputPlayer );
+	    }else { 
+	    	System.out.println("coordonnées invalides format : " );
+	    	System.out.println("rXXX  > reveler une case" );
+	    	System.out.println("dXXX  > marquer d'un drapeau la case");
+	    	System.out.println("X01X  > ligne du tableau");
+	    	System.out.println("XXXB  > colonne du tableau");
+	    }
+	    
+
 	}
 	
 	// Question 1.b] Fonction init pour T et Tadj 
@@ -296,11 +264,16 @@ public class projet_demineur {
 
 	// Question 4.b]
 	public static boolean verifierFormat(String chaine) { 
-		if( chaine.length() == 4) {
+		if( chaine.length() == 4 ) {
 			char lettre1 = chaine.charAt(0);
 			char lettre2 = chaine.charAt(1);
 			char lettre3 = chaine.charAt(2);
 			char lettre4 = chaine.charAt(3);
+			if((lettre2 >= '0' && lettre2 <= '9') && (lettre2 >= '0' && lettre2 <= '9')) {
+			
+			}else {
+				return false;
+			}
 			String ligne = "" + lettre2 + lettre3;
 			int ligneInt = Integer.parseInt(ligne);
 				
