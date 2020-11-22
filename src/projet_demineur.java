@@ -4,25 +4,20 @@
 // 
 //   Optionnel : vous pouvez aussi joindre un document PDF donnant des explications supplÃ©mentaires
 //
-// Pour utiliser des scanners pour lire des entrees depuis le clavier
-// utilises en questions 4.d] pour la fonction jeu()
+
 import java.util.Scanner;
-// Pour la fonction entierAleatoire(a, b) 
 import java.util.concurrent.ThreadLocalRandom;
 
 				/* Main */
 public class projet_demineur {
-
-	public static int entierAleatoire(int a, int b){
-		// Renvoie un entier aleatoire uniforme entre a (inclus) et b (inclus).
-		return ThreadLocalRandom.current().nextInt(a, b + 1);
-	}
-
-	static int[][] T; //Voici les variables globale
+	// variables globales tableaux 2D
+	static int[][] T;
 	static int[][] Tadj;
 
 	public static void main(String[] args) {
+		System.out.print("/>*** Jeu du Démineur en Java *** <\\ ");
 		System.out.println();
+		// Choix des configs 
 		System.out.print("Hauteur de la grille : ");
 		Scanner in0 = new Scanner(System.in);
 	    String hauteurS = in0.nextLine();
@@ -34,46 +29,60 @@ public class projet_demineur {
 		System.out.print("Nombre de mines : ");
 	    Scanner in2 = new Scanner(System.in);
 	    String nbMineS = in2.nextLine();
+	    // conversion des config
 	    int hauteur = Integer.parseInt(hauteurS);
 	    int largeur = Integer.parseInt(largeurS);
 	    int nbMine = Integer.parseInt(nbMineS);
-		init(hauteur,largeur,nbMine);
-		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
-		afficherTableau2D(T);
-		calculerAdjacent();
-		System.out.println();
-		afficherTableau2D(Tadj);
-		afficherGrille(false);
-		jeu();
-	    
+	    // Initialisation de la partie
+	    if(0 <= hauteur && 99 <= hauteur && 0 <= largeur && 52 >= largeur && nbMine > 0 && nbMine < (largeur * hauteur)) {
+	    	init(hauteur,largeur,nbMine);
+			calculerAdjacent();
+			System.out.println();
+			// afficherTableau2D(Tadj);  // décommenter cette ligne pour tricher 
+			afficherGrille(false);
+			// Bonne chance ! 
+			jeu();
+	    }else {
+	    	System.out.println(" Taille de grille ou nombre de mines invalide");
+			System.out.println(" Erreur ! ");
+	    }
 
 	}
 	
-	// Question 1.b] Fonction init pour T et Tadj 
+	// fonction nombre aléatoire
+	public static int entierAleatoire(int a, int b){
+		return ThreadLocalRandom.current().nextInt(a, b + 1);
+	}
+	
+	// Fonction affichage d'un tableau a 2 dimensions 
+		public static void afficherTableau2D(int[][] tab) {
+			for(int i = 0; i < tab.length; i++) {
+				for (int j = 0; j < tab[i].length; j++) {
+					System.out.print(tab[i][j]);
+					System.out.print("  ");
+				}
+				System.out.println();
+			}
+		}
+	
+	// Question 1.b]
+		//Fonction init pour T et Tadj 
 	public static void init(int h, int l, int n) {
-		T 		= new int [h][l];
-		Tadj 	= new int [h][l];
-		int i 	= 0;
-		while(i < n){
-			// remplir de mines 
-			int a = entierAleatoire(0,h-1);
-			int b = entierAleatoire(0,l-1);
-			if( Tadj[a][b] != -1 ) {
-				Tadj[a][b] = -1;
-				i++;
+			T 		= new int [h][l];
+			Tadj 	= new int [h][l];
+			int i 	= 0;
+			while(i < n){
+				// remplir de mines 
+				int a = entierAleatoire(0,h-1);
+				int b = entierAleatoire(0,l-1);
+				if( Tadj[a][b] != -1 ) {
+					Tadj[a][b] = -1;
+					i++;
+				}
 			}
-		}
 	}
-	// affichage d'un tableau a 2 dimensions 
-	public static void afficherTableau2D(int[][] tab) {
-		for(int i = 0; i < tab.length; i++) {
-			for (int j = 0; j < tab[i].length; j++) {
-				System.out.print(tab[i][j]);
-				System.out.print("  ");
-			}
-			System.out.println();
-		}
-	}
+	
+		
 	// Question 1.c] Fonction caseCorrecte
 		// vérifie si les coordonnées sont valides 
 		public static boolean caseCorrecte(int i, int j ) { 
@@ -88,7 +97,6 @@ public class projet_demineur {
 			
 		}
 
-
 		// Question 1.d] Fonction calculerAdjacent
 			// remplit le Tadj avec les nombres de mines adjacentes
 		public static void calculerAdjacent() {
@@ -98,12 +106,12 @@ public class projet_demineur {
 	        int b;      // colonne 
 	        int i =0;
 	        int j =0;
-	        /* 2 'for' imbriqué pour visiter toutes les cases du tableau */ 
+	        /* 2 'for' imbriqués pour visiter toutes les cases du tableau */ 
 	        for(i= 0; i < Tadj.length  ; i++ ){
 	            for(j = 0; j < Tadj[i].length  ; j++){
 	                if( Tadj[i][j] != -1 ){ // Si ce n'est pas une mine
 	                    nbAdj = 0;
-	                    /* 2 'for' imbrique pour tester les cases adjacentes */
+	                    /* 2 'for' imbriques pour tester les cases adjacentes */
 	                    for(a = i-1; a <= i+1; a++){
 	                        for(b = j-1; b <= j+1; b++){
 	                        	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
@@ -119,21 +127,23 @@ public class projet_demineur {
 	        }
 			
 		}
-
-
-	//
 	
+		//
 		// Exercice 2 : Affichage de la grille
 		//
 
 		// Question 2.a]
-		//	Affichage de la grille
+			//	Affichage de la grille
 		public static void afficherGrille(boolean affMines) { 
 	        /* Affichage 1er ligne (celle avec les lettres ) */
 	        int k;
 	        char c = 'A';
 	        System.out.print("  |");
 	        for( k = 0 ; k < T[0].length; k++){
+	        	if(c == '[')
+	        	{
+	        		c = 'a'; // entre 24 et 30 c'est des caractères spéciaux
+	        	}
 	        	System.out.print(c);
 	        	System.out.print("|");
 	            c++;
@@ -166,8 +176,9 @@ public class projet_demineur {
 	               }
 	 	      }
 		}
+		
 	//
-	// Exercice 3 : RÃ©vÃ©ler une case
+	// Exercice 3 : Révéler une case
 	//
 
 	// Question 3.a]
@@ -175,7 +186,7 @@ public class projet_demineur {
 	public static boolean caseAdjacenteZero(int i, int j) { 
 		int a = 0;
 		int b = 0;
-		// parcours des cases adjacentes
+		// parcourt des cases adjacentes
 		 for(a = i-1; a <= i+1; a++){
              for(b = j-1; b <= j+1; b++){
              	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
@@ -185,18 +196,16 @@ public class projet_demineur {
              	}
              }
          } return false; 
-
-		
 	}
 
 	// Question 3.b]
-		// reveler les cases vides
+		// révéler les cases vides
 	public static void revelation(int i, int j) { 
-		T[i][j] = 1; // reveler la case 
+		T[i][j] = 1; // révéler la case 
 		int a = 0;
 		int b = 0;
 		if(Tadj[i][j] == 0) { // si aucune mines adjacentes
-			for(int k = 0; k < 10; k++) { // parcours la grille max 10 fois
+			for(int k = 0; k < 10; k++) { // parcourt la grille max 10 fois
 				for(a = 0; a < Tadj.length  ; a++ ){
 		            for(b = 0; b < Tadj[i].length  ; b++){
 		            	if(caseCorrecte(a,b) && caseAdjacenteZero(a,b)) {
@@ -210,7 +219,6 @@ public class projet_demineur {
 		}
 	}
 
-
 	// Question 3.c] Optionnel
 	public static void relevation2(int i, int j) {
 		
@@ -218,7 +226,7 @@ public class projet_demineur {
 	}
 
 	// Question 3.d]
-	// placer un drapeau
+		// placer un drapeau
 	public static void actionDrapeau(int i, int j) { 
 		if(caseCorrecte(i,j)) {	
 			if(T[i][j] == 0) {
@@ -229,8 +237,8 @@ public class projet_demineur {
 		}
 	}
 	
-	
 	// Question 3.e]
+		//révéler la case
 	public static boolean revelerCase(int i, int j) { 
 			if(Tadj[i][j] == -1) { //mine
 				return false;
@@ -241,16 +249,16 @@ public class projet_demineur {
 	
 	}
 
-
 	//
 	// Exercice 4 : Boucle de jeu
 	//
 
 	// Question 4.a]
+		//Permet de savoir si la partie est gagnée
 	public static boolean aGagne() { // true si gagné 
 		int i = 0;
 		int j = 0;
-			/* Parcours de la grille */
+			/* Parcourt de la grille */
 		  for(i= 0; i < Tadj.length  ; i++ ){
 	            for(j = 0; j < Tadj[i].length  ; j++){
 	            	if(Tadj[i][j] != -1 & T[i][j] == 0) { 
@@ -262,8 +270,9 @@ public class projet_demineur {
 	}
 
 	// Question 4.b]
+		//vérifier le format de la chaine de caractères
 	public static boolean verifierFormat(String chaine) { 
-		if( chaine.length() == 4 ) { // la chaine doit etre longue de 4 caracteres
+		if( chaine.length() == 4 ) { // la chaine doit etre longue de 4 caractères
 			char lettre1 = chaine.charAt(0);//
 			char lettre2 = chaine.charAt(1);// on sépare chaque caractère
 			char lettre3 = chaine.charAt(2);// dans un char
@@ -294,17 +303,18 @@ public class projet_demineur {
 	}
 
 	// Question 4.c]
+		// Convertit la chaine en un tableau d'int
 	public static int[] conversionCoordonnees(String chaine) {
 		int[] InputJoueur = new int[3]; // on créé le tableau
-		char lettre1 = chaine.charAt(0); // r   d
+		char lettre1 = chaine.charAt(0); // r  d
 		char lettre2 = chaine.charAt(1); // 0  9
 		char lettre3 = chaine.charAt(2); // 0  9 
-		char lettre4 = chaine.charAt(3); // A  Z a z 
+		char lettre4 = chaine.charAt(3); // A  Z  a z 
 		//on transforme les deux nombres (char) en un int a deux digits
 		String chiffresString = "" + lettre2 + lettre3;
 		int chiffresInt = Integer.parseInt(chiffresString);
 		
-		/* reveler ou drapeau */
+		/* révéler ou drapeau */
 		if(lettre1 == 'r') {
 			InputJoueur[2] = 1;
 		}else if (lettre1 == 'd') {
@@ -330,9 +340,10 @@ public class projet_demineur {
 	}
 
 	// Question 4.d]
+		// Boucle de jeu 
 	public static void jeu() {
 		boolean etatPartie = aGagne();
-		boolean boom = true;
+		boolean boom = true; // si on fait exploser une mine BOOM = false   :(
 		while(boom && !etatPartie) {
 			/* Joueuse entre une action et coordonnée de case */
 			System.out.println();
@@ -344,16 +355,17 @@ public class projet_demineur {
 		    	System.out.print("coordonnées valides : " + inputPlayer );
 		    	System.out.println();
 		    	int[] InputJoueur = conversionCoordonnees(inputPlayer); //trasfert la conversion dans le tableau
+		    	// Quelle action : 
 		    	if(InputJoueur[2] == 0 && caseCorrecte(InputJoueur[0],InputJoueur[1])) { 
-		    		actionDrapeau(InputJoueur[0],InputJoueur[1]); // drapeau
+		    		actionDrapeau(InputJoueur[0],InputJoueur[1]); 							// drapeau
 		    		afficherGrille(false);
 		    	}else if(InputJoueur[2] == 1 && caseCorrecte(InputJoueur[0],InputJoueur[1])) {
-		    		boom = revelerCase(InputJoueur[0],InputJoueur[1]); // reveler une case
+		    		boom = revelerCase(InputJoueur[0],InputJoueur[1]); 						// reveler une case
 		    		if(!boom) { // mine découverte
 		    			System.out.println();
 		    			System.out.println("	PERDU !	  "); 
 		    			afficherGrille(true);
-		    		}else { // c'etait pas une mine 
+		    		}else { // ce n'était pas une mine 
 		    			afficherGrille(false); // affiche la grille actualisée et on recommence la boucle
 		    		}
 		    	}
@@ -362,7 +374,7 @@ public class projet_demineur {
 		    		System.out.println();
 	    			System.out.println("	GAGNE !	  ");
 		    	}
-		    }else { // si input de la joueuse n'est pas bon 
+		    }else { // si l'input de la joueuse n'est pas bon 
 		    	System.out.println("coordonnées invalides format : " );
 		    	System.out.println("rXXX  > reveler une case" );
 		    	System.out.println("dXXX  > marquer d'un drapeau la case");
