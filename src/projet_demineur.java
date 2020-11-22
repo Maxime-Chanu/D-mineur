@@ -30,19 +30,7 @@ public class projet_demineur {
 		System.out.println();
 		afficherTableau2D(Tadj);
 		afficherGrille(false);
-		System.out.println();
-		System.out.print("Entrez une case valide : ");
-		Scanner in = new Scanner(System.in);
-	    String inputPlayer = in.nextLine();
-	    if(verifierFormat(inputPlayer)) {
-	    	System.out.print("coordonnées valides : " + inputPlayer );
-	    }else { 
-	    	System.out.println("coordonnées invalides format : " );
-	    	System.out.println("rXXX  > reveler une case" );
-	    	System.out.println("dXXX  > marquer d'un drapeau la case");
-	    	System.out.println("X01X  > ligne du tableau");
-	    	System.out.println("XXXB  > colonne du tableau");
-	    }
+		jeu();
 	    
 
 	}
@@ -248,7 +236,7 @@ public class projet_demineur {
 	//
 
 	// Question 4.a]
-	public static boolean aGagne() {
+	public static boolean aGagne() { // true si gagné 
 		int i = 0;
 		int j = 0;
 		  for(i= 0; i < Tadj.length  ; i++ ){
@@ -330,7 +318,45 @@ public class projet_demineur {
 
 	// Question 4.d]
 	public static void jeu() {
-		
+		boolean etatPartie = aGagne();
+		boolean boom = true;
+		while(boom && !etatPartie) {
+			
+			System.out.println();
+			System.out.print("Entrez une case valide : ");
+			Scanner in = new Scanner(System.in);
+		    String inputPlayer = in.nextLine();
+		     
+		    if(verifierFormat(inputPlayer)) {
+		    	System.out.print("coordonnées valides : " + inputPlayer );
+		    	System.out.println();
+		    	int[] InputJoueur = conversionCoordonnees(inputPlayer);
+		    	if(InputJoueur[2] == 0) {
+		    		actionDrapeau(InputJoueur[0],InputJoueur[1]);
+		    		afficherGrille(false);
+		    	}else if(InputJoueur[2] == 1) {
+		    		boom = revelerCase(InputJoueur[0],InputJoueur[1]);
+		    		if(!boom) { // mine découverte
+		    			System.out.println();
+		    			System.out.println("	PERDU !	  ");
+		    			afficherGrille(true);
+		    		}else {
+		    			afficherGrille(false);
+		    		}
+		    	}
+		    	etatPartie = aGagne();
+		    	if(etatPartie) {
+		    		System.out.println();
+	    			System.out.println("	GAGNE !	  ");
+		    	}
+		    }else { 
+		    	System.out.println("coordonnées invalides format : " );
+		    	System.out.println("rXXX  > reveler une case" );
+		    	System.out.println("dXXX  > marquer d'un drapeau la case");
+		    	System.out.println("X01X  > ligne du tableau");
+		    	System.out.println("XXXB  > colonne du tableau");
+		    }
+		}
 	}
 
 	// Question 4.e]
