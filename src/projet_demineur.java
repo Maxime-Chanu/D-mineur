@@ -75,13 +75,14 @@ public class projet_demineur {
 		}
 	}
 	// Question 1.c] Fonction caseCorrecte
+		// vérifie si les coordonnées sont valides 
 		public static boolean caseCorrecte(int i, int j ) { 
 	        int largeur = T[0].length;
 	        int hauteur = T.length; 
 	        if(j >= largeur || i >= hauteur){
-	            return false;
+	            return false; // invalides 
 	        }else{
-	            return true;
+	            return true; // valides
 	        }
 	        
 			
@@ -89,6 +90,7 @@ public class projet_demineur {
 
 
 		// Question 1.d] Fonction calculerAdjacent
+			// remplit le Tadj avec les nombres de mines adjacentes
 		public static void calculerAdjacent() {
 	        int nbAdj; // nb de mines adjacentes 
 	        /* Variable de détection des cases autour */
@@ -96,17 +98,17 @@ public class projet_demineur {
 	        int b;      // colonne 
 	        int i =0;
 	        int j =0;
-	        /* 2 for imbrique pour visiter toute les cases du tableau */ 
+	        /* 2 'for' imbriqué pour visiter toutes les cases du tableau */ 
 	        for(i= 0; i < Tadj.length  ; i++ ){
 	            for(j = 0; j < Tadj[i].length  ; j++){
 	                if( Tadj[i][j] != -1 ){ // Si ce n'est pas une mine
 	                    nbAdj = 0;
-	                    /* 2 for imbrique pour tester les cases adjacentes */
+	                    /* 2 'for' imbrique pour tester les cases adjacentes */
 	                    for(a = i-1; a <= i+1; a++){
 	                        for(b = j-1; b <= j+1; b++){
 	                        	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
-	                        		 if(Tadj[a][b] == -1){
-	 	                                nbAdj++;
+	                        		 if(Tadj[a][b] == -1){ // si présence mine
+	 	                                nbAdj++; // on incrémente 
 	 	                            }
 	                        	}
 	                        }
@@ -125,6 +127,7 @@ public class projet_demineur {
 		//
 
 		// Question 2.a]
+		//	Affichage de la grille
 		public static void afficherGrille(boolean affMines) { 
 	        /* Affichage 1er ligne (celle avec les lettres ) */
 	        int k;
@@ -135,7 +138,7 @@ public class projet_demineur {
 	        	System.out.print("|");
 	            c++;
 	        }
-	        /*  affichage de la grille de jeu    */ 
+	               	/* le numéro de ligne  */ 
 	           for(int i = 0; i < T.length; i++ ){
 	        	   System.out.println();
 	        	   if(i<10) {
@@ -143,13 +146,13 @@ public class projet_demineur {
 	        	   }else{
 	        		   System.out.print( i + "|");
 	        	   }
-	        	   
+	         /*  affichage de la grille de jeu    */ 
 	               for(int j = 0; j < T[i].length; j++){
-	                   /* revelé toutes les mines */
+	                   /* reveler toutes les mines */
 	                   if(affMines && Tadj[i][j] == -1){
 	                       T[i][j] = 1;
 	                   }
-	                   /* affichage du contenu de chaque case */ 
+	                   /* affichage du contenu en fonction de la case */ 
 	                   if(T[i][j] == 0){
 	                	   System.out.print(" ");
 	                   }else if(T[i][j] == 1 & Tadj[i][j] == -1){
@@ -163,51 +166,42 @@ public class projet_demineur {
 	               }
 	 	      }
 		}
-
-	      
-
-
 	//
 	// Exercice 3 : RÃ©vÃ©ler une case
 	//
 
 	// Question 3.a]
+		// Détéction des cases adjacentes '0'
 	public static boolean caseAdjacenteZero(int i, int j) { 
-		//boolean zero = false;
 		int a = 0;
 		int b = 0;
 		// parcours des cases adjacentes
 		 for(a = i-1; a <= i+1; a++){
              for(b = j-1; b <= j+1; b++){
              	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
-             		 if(T[a][b] == 1 & Tadj[i][j] == 0){ // revelée ?
+             		 if(T[a][b] == 1 & (Tadj[i][j] == 0 || Tadj[i][j] == 1 || Tadj[i][j] == 2 )){ // revelée ?
                         return true;
-                      }
+                     }
              	}
              }
-         } return false;
-	//	if(zero & Tadj[i][j] == 0) {
-	//		return true;
-	//	}else {
-	//		return false;
-	//	}
+         } return false; 
+
 		
 	}
 
 	// Question 3.b]
+		// reveler les cases vides
 	public static void revelation(int i, int j) { 
-		T[i][j] = 1;
+		T[i][j] = 1; // reveler la case 
 		int a = 0;
 		int b = 0;
-		//boolean auMoinsUneNouvelleCase = true;
-		if(Tadj[i][j] == 0) {
-			for(int ko =0; ko < 10; ko++) {
-				//auMoinsUneNouvelleCase = false;
+		if(Tadj[i][j] == 0) { // si aucune mines adjacentes
+			for(int k = 0; k < 10; k++) { // parcours la grille max 10 fois
 				for(a = 0; a < Tadj.length  ; a++ ){
 		            for(b = 0; b < Tadj[i].length  ; b++){
-		            	if(caseAdjacenteZero(a,b)) {
-		            		T[a][b] = 1;
-		            	//	auMoinsUneNouvelleCase = true;
+		            	if(caseCorrecte(a,b) && caseAdjacenteZero(a,b)) {
+		            		// si elle a un '0' adjacent on la revèle 
+		            		T[a][b] = 1; 
 		            	}
 		            }
 				}
@@ -218,9 +212,27 @@ public class projet_demineur {
 
 
 	// Question 3.c] Optionnel
-	public static void relevation2() { // ATTENTION, vous devez modifier la signature de cette fonction
+	public static void relevation2(int i, int j) {
+		boolean fin = false;
+		while(!fin) {
+			T[i][j] = 1; // reveler la case 
+			int a = 0;
+			int b = 0;
+			if(Tadj[i][j] == 0) { // si aucune mines adjacentes
+				for(int k = 0; k < 10; k++) { // parcours la grille max 10 fois
+					for(a = 0; a < Tadj.length  ; a++ ){
+			            for(b = 0; b < Tadj[i].length  ; b++){
+			            	if(caseCorrecte(a,b) && caseAdjacenteZero(a,b)) {
+			            		// si elle a un '0' adjacent on la revèle 
+			            		T[a][b] = 1; 
+			            	}
+			            }
+					}
+				}
+				 
+			}
+		}
 		
-	
 	}
 
 	// Question 3.d]
