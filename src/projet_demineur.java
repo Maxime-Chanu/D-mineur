@@ -213,24 +213,7 @@ public class projet_demineur {
 
 	// Question 3.c] Optionnel
 	public static void relevation2(int i, int j) {
-		boolean fin = false;
-		while(!fin) {
-			T[i][j] = 1; // reveler la case 
-			int a = 0;
-			int b = 0;
-			if(Tadj[i][j] == 0) { // si aucune mines adjacentes
-	                    /* 2 'for' imbrique pour tester les cases adjacentes */
-	                    for(a = i-1; a <= i+1; a++){
-	                        for(b = j-1; b <= j+1; b++){
-	                        	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
-	                        		 if(Tadj[a][b] != -1){ // si présence mine
-	 	                               T[a][b] = 1;
-	 	                            }
-	                        	}
-	                        }
-	                    }	                   			 
-			}
-		}
+		
 		
 	}
 
