@@ -22,8 +22,22 @@ public class projet_demineur {
 	static int[][] Tadj;
 
 	public static void main(String[] args) {
-		
-		init(3,3,1);
+		System.out.println();
+		System.out.print("Hauteur de la grille : ");
+		Scanner in0 = new Scanner(System.in);
+	    String hauteurS = in0.nextLine();
+	    System.out.println();
+		System.out.print("Largeur de la grille : ");
+	    Scanner in1 = new Scanner(System.in);
+	    String largeurS = in1.nextLine();
+	    System.out.println();
+		System.out.print("Nombre de mines : ");
+	    Scanner in2 = new Scanner(System.in);
+	    String nbMineS = in2.nextLine();
+	    int hauteur = Integer.parseInt(hauteurS);
+	    int largeur = Integer.parseInt(largeurS);
+	    int nbMine = Integer.parseInt(nbMineS);
+		init(hauteur,largeur,nbMine);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
 		afficherTableau2D(T);
 		calculerAdjacent();
