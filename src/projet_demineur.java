@@ -25,7 +25,8 @@ public class projet_demineur {
 		
 		init(3,3,1);
 		boolean go = caseCorrecte(3,2); // verif de la fonction OK 
-		System.out.println(go);
+		/*
+		 System.out.println(go);
 		afficherTableau2D(T);
 		calculerAdjacent();
 		System.out.println();
@@ -36,8 +37,34 @@ public class projet_demineur {
 		System.out.println();
 		afficherGrille(false);
 		System.out.println(aGagne());
-	
-	
+		 */
+		/*
+		String str ="12";
+		char ch1 = str.charAt(0);
+		char ch2 = str.charAt(1);
+		String wola = "" + ch1 + ch2;
+		int resultat = Integer.parseInt(wola);
+		System.out.println("le résultat est : " + (resultat ) );
+		int entier = Character.getNumericValue(lettre) ;
+		*/
+		String joueur = "r12z";
+		char lettre = joueur.charAt(3); // 'A'
+		String lettreS = "" + lettre; // string : "A"
+		if(lettreS.toUpperCase() == lettreS) { // CAPS
+			char lettreChar = lettreS.charAt(0);
+			int j = Character.getNumericValue(lettreChar) ;
+			j -= 10;
+			System.out.println(j);
+		}else if (lettreS.toUpperCase() != lettreS) { //min
+			char lettreChar = lettreS.charAt(0);
+			int j = Character.getNumericValue(lettreChar) ;
+			j -= 10;
+			j += 26;
+			System.out.println(j);
+			System.out.println("min");
+		}
+	//	System.out.println("le résultat est : " + (entier  ) );
+		
 		
 	}
 	
