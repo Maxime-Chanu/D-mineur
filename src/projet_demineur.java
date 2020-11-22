@@ -219,17 +219,16 @@ public class projet_demineur {
 			int a = 0;
 			int b = 0;
 			if(Tadj[i][j] == 0) { // si aucune mines adjacentes
-				for(int k = 0; k < 10; k++) { // parcours la grille max 10 fois
-					for(a = 0; a < Tadj.length  ; a++ ){
-			            for(b = 0; b < Tadj[i].length  ; b++){
-			            	if(caseCorrecte(a,b) && caseAdjacenteZero(a,b)) {
-			            		// si elle a un '0' adjacent on la revèle 
-			            		T[a][b] = 1; 
-			            	}
-			            }
-					}
-				}
-				 
+	                    /* 2 'for' imbrique pour tester les cases adjacentes */
+	                    for(a = i-1; a <= i+1; a++){
+	                        for(b = j-1; b <= j+1; b++){
+	                        	if(a >= 0 & a < Tadj.length & b >= 0 & b < Tadj[i].length ) {
+	                        		 if(Tadj[a][b] != -1){ // si présence mine
+	 	                               T[a][b] = 1;
+	 	                            }
+	                        	}
+	                        }
+	                    }	                   			 
 			}
 		}
 		
