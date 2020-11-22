@@ -218,24 +218,27 @@ public class projet_demineur {
 	}
 
 	// Question 3.d]
+	// placer un drapeau
 	public static void actionDrapeau(int i, int j) { 
-		if(T[i][j] == 0) {
-			T[i][j] = 2;
-		}else if ( T[i][j] == 2) {
-			T[i][j] = 0;
+		if(caseCorrecte(i,j)) {	
+			if(T[i][j] == 0) {
+				T[i][j] = 2; //add drapeau
+			}else if ( T[i][j] == 2) {
+				T[i][j] = 0; //del drapeau
+			}
 		}
-		
 	}
 	
 	
 	// Question 3.e]
 	public static boolean revelerCase(int i, int j) { 
-		if(Tadj[i][j] == -1) {
-			return false;
-		}else {
-			revelation(i,j);
-			return true;
-		}
+			if(Tadj[i][j] == -1) { //mine
+				return false;
+			}else {
+				revelation(i,j); // pas mine
+				return true;
+			}
+	
 	}
 
 
@@ -247,12 +250,12 @@ public class projet_demineur {
 	public static boolean aGagne() { // true si gagné 
 		int i = 0;
 		int j = 0;
+			/* Parcours de la grille */
 		  for(i= 0; i < Tadj.length  ; i++ ){
 	            for(j = 0; j < Tadj[i].length  ; j++){
-	            	if(Tadj[i][j] != -1 & T[i][j] == 0) {
-	            		return false;
+	            	if(Tadj[i][j] != -1 & T[i][j] == 0) { 
+	            		return false; //  mine révélée
 	            	}
-	            	
 	            }
 		  }
 		  return true; 
@@ -260,27 +263,27 @@ public class projet_demineur {
 
 	// Question 4.b]
 	public static boolean verifierFormat(String chaine) { 
-		if( chaine.length() == 4 ) {
-			char lettre1 = chaine.charAt(0);
-			char lettre2 = chaine.charAt(1);
-			char lettre3 = chaine.charAt(2);
-			char lettre4 = chaine.charAt(3);
+		if( chaine.length() == 4 ) { // la chaine doit etre longue de 4 caracteres
+			char lettre1 = chaine.charAt(0);//
+			char lettre2 = chaine.charAt(1);// on sépare chaque caractère
+			char lettre3 = chaine.charAt(2);// dans un char
+			char lettre4 = chaine.charAt(3);//
 			if((lettre2 >= '0' && lettre2 <= '9') && (lettre2 >= '0' && lettre2 <= '9')) {
-			
+			// vérifie si les deux caractères du milieu sont bien des nombres
 			}else {
-				return false;
+				return false; // mauvais format 
 			}
+			// transforme les deux nombre (char) en un int a deux digit
 			String ligne = "" + lettre2 + lettre3;
 			int ligneInt = Integer.parseInt(ligne);
-				
-			
-			if(lettre1 != 'd' & lettre1 != 'r') {
+							
+			if(lettre1 != 'd' & lettre1 != 'r') { // check le premier caractère
 				return false;
 			}
-			if(ligneInt < 0 || ligneInt > 99) {
+			if(ligneInt < 0 || ligneInt > 99) { // check la ligne
 				return false;
 			}
-			if(lettre4 < 'A' || lettre4 > 'z') {
+			if(lettre4 < 'A' || lettre4 > 'z') {// check la colonne
 				return false;
 			}
 			return true;
@@ -339,25 +342,25 @@ public class projet_demineur {
 		    	System.out.print("coordonnées valides : " + inputPlayer );
 		    	System.out.println();
 		    	int[] InputJoueur = conversionCoordonnees(inputPlayer);
-		    	if(InputJoueur[2] == 0) {
+		    	if(InputJoueur[2] == 0 && caseCorrecte(InputJoueur[0],InputJoueur[1])) {
 		    		actionDrapeau(InputJoueur[0],InputJoueur[1]);
 		    		afficherGrille(false);
-		    	}else if(InputJoueur[2] == 1) {
+		    	}else if(InputJoueur[2] == 1 && caseCorrecte(InputJoueur[0],InputJoueur[1])) {
 		    		boom = revelerCase(InputJoueur[0],InputJoueur[1]);
 		    		if(!boom) { // mine découverte
 		    			System.out.println();
 		    			System.out.println("	PERDU !	  ");
 		    			afficherGrille(true);
-		    		}else {
+		    		}else { // c'etait pas une mine 
 		    			afficherGrille(false);
 		    		}
 		    	}
-		    	etatPartie = aGagne();
-		    	if(etatPartie) {
+		    	etatPartie = aGagne(); // la partie est-elle gagnée ? 
+		    	if(etatPartie) { // oui
 		    		System.out.println();
 	    			System.out.println("	GAGNE !	  ");
 		    	}
-		    }else { 
+		    }else {
 		    	System.out.println("coordonnées invalides format : " );
 		    	System.out.println("rXXX  > reveler une case" );
 		    	System.out.println("dXXX  > marquer d'un drapeau la case");
