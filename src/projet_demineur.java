@@ -47,6 +47,7 @@ public class projet_demineur {
 		System.out.println("le résultat est : " + (resultat ) );
 		int entier = Character.getNumericValue(lettre) ;
 		*/
+		/*
 		String joueur = "r12z";
 		char lettre = joueur.charAt(3); // 'A'
 		String lettreS = "" + lettre; // string : "A"
@@ -69,10 +70,13 @@ public class projet_demineur {
 		}else { 
 			System.out.println("sup à b");
 		}
+		*/
 	//	System.out.println("le résultat est : " + (entier  ) );
-		boolean res = verifierFormat("d01B");
+		String chaine = "d02A";
+		boolean res = verifierFormat(chaine);
 		System.out.println(res);
-		
+		int[] InputJoueur = conversionCoordonnees(chaine);
+		System.out.println(InputJoueur[0] + "," + InputJoueur[1] + "," +InputJoueur[2] );
 	}
 	
 	// Question 1.b] Fonction init pour T et Tadj 
@@ -318,8 +322,36 @@ public class projet_demineur {
 	}
 
 	// Question 4.c]
-	public static void conversionCoordonnees() { // ATTENTION, vous devez modifier la signature de cette fonction
+	public static int[] conversionCoordonnees(String chaine) {
+		int[] InputJoueur = new int[3];
+		char lettre1 = chaine.charAt(0); // r   d
+		char lettre2 = chaine.charAt(1); // 0  9
+		char lettre3 = chaine.charAt(2); // 0  9 
+		char lettre4 = chaine.charAt(3); // A  Z a z 
+		String chiffresString = "" + lettre2 + lettre3;
+		int chiffresInt = Integer.parseInt(chiffresString);
 		
+		/* reveler ou drapeau */
+		if(lettre1 == 'r') {
+			InputJoueur[2] = 1;
+		}else if (lettre1 == 'd') {
+			InputJoueur[2] = 0;
+		}
+		/* Numéro de ligne */
+		if(0 <= chiffresInt || chiffresInt <= 99) {
+			InputJoueur[0] = chiffresInt;
+		}
+		/* Lettre colonne en numéro de colonne */ 
+		String lettreS = "" + lettre4; 		// convert char en String
+		if(lettreS.toUpperCase() == lettreS) { // CAPS ?
+			char lettreChar = lettreS.charAt(0); // convert String en char
+			InputJoueur[1] = Character.getNumericValue(lettreChar) - 10 ; // insert la colonne
+		}else if (lettreS.toUpperCase() != lettreS) { //minuscule ? 
+			char lettreChar = lettreS.charAt(0); // convert String en char
+			InputJoueur[1] = Character.getNumericValue(lettreChar) - 10 + 26 ; // -10 pour l'offset et +26 car lettre minuscule 
+		}
+
+		return InputJoueur;
 		
 	}
 
