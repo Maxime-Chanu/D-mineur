@@ -34,7 +34,7 @@ public class projet_demineur {
 	    int largeur = Integer.parseInt(largeurS);
 	    int nbMine = Integer.parseInt(nbMineS);
 	    // Initialisation de la partie
-	    if(0 <= hauteur && 99 <= hauteur && 0 <= largeur && 52 >= largeur && nbMine > 0 && nbMine < (largeur * hauteur)) {
+	    if(0 <= hauteur && 99 >= hauteur && 0 <= largeur && 52 >= largeur && nbMine > 0 && nbMine < (largeur * hauteur)) {
 	    	init(hauteur,largeur,nbMine);
 			calculerAdjacent();
 			System.out.println();
