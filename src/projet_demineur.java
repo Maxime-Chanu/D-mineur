@@ -273,7 +273,7 @@ public class projet_demineur {
 			}else {
 				return false; // mauvais format 
 			}
-			// transforme les deux nombre (char) en un int a deux digit
+			// transforme les deux nombres (char) en un int a deux digits
 			String ligne = "" + lettre2 + lettre3;
 			int ligneInt = Integer.parseInt(ligne);
 							
@@ -295,11 +295,12 @@ public class projet_demineur {
 
 	// Question 4.c]
 	public static int[] conversionCoordonnees(String chaine) {
-		int[] InputJoueur = new int[3];
+		int[] InputJoueur = new int[3]; // on crÈÈ le tableau
 		char lettre1 = chaine.charAt(0); // r   d
 		char lettre2 = chaine.charAt(1); // 0  9
 		char lettre3 = chaine.charAt(2); // 0  9 
 		char lettre4 = chaine.charAt(3); // A  Z a z 
+		//on transforme les deux nombres (char) en un int a deux digits
 		String chiffresString = "" + lettre2 + lettre3;
 		int chiffresInt = Integer.parseInt(chiffresString);
 		
@@ -314,15 +315,16 @@ public class projet_demineur {
 			InputJoueur[0] = chiffresInt;
 		}
 		/* Lettre colonne en numÈro de colonne */ 
-		String lettreS = "" + lettre4; 		// convert char en String
+		String lettreS = "" + lettre4; 		// convertir char en String
 		if(lettreS.toUpperCase() == lettreS) { // CAPS ?
 			char lettreChar = lettreS.charAt(0); // convert String en char
 			InputJoueur[1] = Character.getNumericValue(lettreChar) - 10 ; // insert la colonne
-		}else if (lettreS.toUpperCase() != lettreS) { //minuscule ? 
+		}else if (lettreS.toUpperCase() != lettreS) { // minuscule ? 
 			char lettreChar = lettreS.charAt(0); // convert String en char
 			InputJoueur[1] = Character.getNumericValue(lettreChar) - 10 + 26 ; // -10 pour l'offset et +26 car lettre minuscule 
 		}
-
+		/* 		NB :    A -> Z = 0  -> 25 
+		 * 				a -> z = 26 -> 52  	  */	 		
 		return InputJoueur;
 		
 	}
@@ -332,27 +334,27 @@ public class projet_demineur {
 		boolean etatPartie = aGagne();
 		boolean boom = true;
 		while(boom && !etatPartie) {
-			
+			/* Joueuse entre une action et coordonnÈe de case */
 			System.out.println();
 			System.out.print("Entrez une case valide : ");
 			Scanner in = new Scanner(System.in);
 		    String inputPlayer = in.nextLine();
 		     
-		    if(verifierFormat(inputPlayer)) {
+		    if(verifierFormat(inputPlayer)) { // vÈrifie le format 
 		    	System.out.print("coordonnÈes valides : " + inputPlayer );
 		    	System.out.println();
-		    	int[] InputJoueur = conversionCoordonnees(inputPlayer);
-		    	if(InputJoueur[2] == 0 && caseCorrecte(InputJoueur[0],InputJoueur[1])) {
-		    		actionDrapeau(InputJoueur[0],InputJoueur[1]);
+		    	int[] InputJoueur = conversionCoordonnees(inputPlayer); //trasfert la conversion dans le tableau
+		    	if(InputJoueur[2] == 0 && caseCorrecte(InputJoueur[0],InputJoueur[1])) { 
+		    		actionDrapeau(InputJoueur[0],InputJoueur[1]); // drapeau
 		    		afficherGrille(false);
 		    	}else if(InputJoueur[2] == 1 && caseCorrecte(InputJoueur[0],InputJoueur[1])) {
-		    		boom = revelerCase(InputJoueur[0],InputJoueur[1]);
+		    		boom = revelerCase(InputJoueur[0],InputJoueur[1]); // reveler une case
 		    		if(!boom) { // mine dÈcouverte
 		    			System.out.println();
-		    			System.out.println("	PERDU !	  ");
+		    			System.out.println("	PERDU !	  "); 
 		    			afficherGrille(true);
 		    		}else { // c'etait pas une mine 
-		    			afficherGrille(false);
+		    			afficherGrille(false); // affiche la grille actualisÈe et on recommence la boucle
 		    		}
 		    	}
 		    	etatPartie = aGagne(); // la partie est-elle gagnÈe ? 
@@ -360,7 +362,7 @@ public class projet_demineur {
 		    		System.out.println();
 	    			System.out.println("	GAGNE !	  ");
 		    	}
-		    }else {
+		    }else { // si input de la joueuse n'est pas bon 
 		    	System.out.println("coordonnÈes invalides format : " );
 		    	System.out.println("rXXX  > reveler une case" );
 		    	System.out.println("dXXX  > marquer d'un drapeau la case");
@@ -370,11 +372,7 @@ public class projet_demineur {
 		}
 	}
 
-	// Question 4.e]
-	// Votre *unique* m√©thode main
-	// elle est en haut 
-
-
+	
 	//
 	// Exercice 5 bonus challenge : Pour aller plus loin
 	//
