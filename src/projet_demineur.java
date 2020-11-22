@@ -63,8 +63,15 @@ public class projet_demineur {
 			System.out.println(j);
 			System.out.println("min");
 		}
+		char colonne = 'b';
+		if(colonne < 'b') {
+			System.out.println("inf à b");
+		}else { 
+			System.out.println("sup à b");
+		}
 	//	System.out.println("le résultat est : " + (entier  ) );
-		
+		boolean res = verifierFormat("d01B");
+		System.out.println(res);
 		
 	}
 	
@@ -284,8 +291,29 @@ public class projet_demineur {
 	}
 
 	// Question 4.b]
-	public static void verifierFormat() { // ATTENTION, vous devez modifier la signature de cette fonction
-		
+	public static boolean verifierFormat(String chaine) { 
+		if( chaine.length() == 4) {
+			char lettre1 = chaine.charAt(0);
+			char lettre2 = chaine.charAt(1);
+			char lettre3 = chaine.charAt(2);
+			char lettre4 = chaine.charAt(3);
+			String ligne = "" + lettre2 + lettre3;
+			int ligneInt = Integer.parseInt(ligne);
+				
+			
+			if(lettre1 != 'd' & lettre1 != 'r') {
+				return false;
+			}
+			if(ligneInt < 0 || ligneInt > 99) {
+				return false;
+			}
+			if(lettre4 < 'A' || lettre4 > 'z') {
+				return false;
+			}
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 
