@@ -3,7 +3,7 @@
 // Maxime Chanu L1 G5 - B 
 // 
 //   Optionnel : vous pouvez aussi joindre un document PDF donnant des explications supplémentaires
-//
+//	Envoi vers Master + GitHub
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
