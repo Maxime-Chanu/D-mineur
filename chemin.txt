@@ -2,4 +2,6 @@ E:/Git/Dmineur/D-mineur
 
 /* chemin d'acces pour Bash  */
 
+L'ID du commit avant le bug qui a tout delete : 
+
 faba6b4ec
